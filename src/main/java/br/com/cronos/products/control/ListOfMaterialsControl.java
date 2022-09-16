@@ -1,5 +1,7 @@
 package br.com.cronos.products.control;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +28,10 @@ public class ListOfMaterialsControl {
     private FeedstockRepository fr;
 
     @PostMapping("/listofmaterials")
-    public ResponseEntity<ListOfMaterialsModel> register(@RequestBody ListOfMaterialsForm form){
+    public ResponseEntity<ListOfMaterialsModel> register(@RequestBody @Valid ListOfMaterialsForm form){
         ListOfMaterialsModel list = form.convert(pr, fr);
         return new ResponseEntity<ListOfMaterialsModel>(lr.save(list), HttpStatus.CREATED);
     }
+
     
 }
